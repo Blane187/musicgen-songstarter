@@ -47,31 +47,21 @@ def generate_music(description, melody_audio):
 
         return path
     
-# Define a interface Gradio
-description = gr.Textbox(label="Description", placeholder="acoustic, guitar, melody, trap, d minor, 90 bpm")
-melody_audio = gr.Audio(label="Melody Audio (optional)", type="filepath")
-output_path = gr.Audio(label="Generated Music", type="filepath")
 
-gr.Interface(
-    fn=generate_music,
-    inputs=[description, melody_audio],
-    outputs=output_path,
-    title="MusicGen Demo",
-    description="Generate music using the MusicGen model by Nateraw.\n\n"
-                "Model: musicgen-songstarter-v0.2\n"
-                "Download the model [here](https://huggingface.co/nateraw/musicgen-songstarter-v0.2).\n\n"
-                "musicgen-songstarter-v0.2 is a musicgen-stereo-melody-large fine-tuned on a dataset of melody loops from Nateraw's Splice sample library. "
-                "It's intended to be used to generate song ideas that are useful for music producers. It generates stereo audio in 32khz.\n\n"
-                "Compared to musicgen-songstarter-v0.1, this new version:\n"
-                "- Was trained on 3x more unique, manually-curated samples that Nateraw painstakingly purchased on Splice\n"
-                "- Is twice the size, bumped up from size medium ➡️ large transformer LM\n\n"
-                "If you find this model interesting, please consider:\n"
-                "- Following Nateraw on [GitHub](https://github.com/nateraw)\n"
-                "- Following Nateraw on [Twitter](https://twitter.com/nateraw)\n\n"
-                "Space created by [artificialguybr](https://twitter.com/artificialguybr) on Twitter.",
+    
+    title="",
+    
+
+with gr.Blocks(title="demo app") as demo:
+    gr.Markdown("# MusicGen Demo")
+    melody_audio = gr.Audio(label="Melody Audio (optional)", type="filepath")
+    output_path = gr.Audio(label="Generated Music", type="filepath")
+    greet_btn = gr.Button("Greet")
+    greet_btn.click(fn=generate_music, inputs=[description, melody_audio], outputs=output_path,)
     examples=[
         ["trap, synthesizer, songstarters, dark, G# minor, 140 bpm", "./assets/kalhonaho.mp3"],
         ["sega genesis, 8bit, dark, 140 bpm", None],
         ["upbeat, electronic, synth, dance, 120 bpm", None]
     ]
-).launch()
+
+demo.launch()
