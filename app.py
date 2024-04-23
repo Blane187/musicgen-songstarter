@@ -48,8 +48,7 @@ def generate_music(description, melody_audio):
         return path
     
 
-    
-    title="",
+
     
 
 with gr.Blocks(title="demo app") as demo:
@@ -64,4 +63,4 @@ with gr.Blocks(title="demo app") as demo:
         ["upbeat, electronic, synth, dance, 120 bpm", None]
     ]
 
-demo.launch()
+demo.launch(share=True)
